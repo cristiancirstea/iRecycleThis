@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Campus Rush</string>
+    <string name="action_settings">Settings</string>
+  
+    <string name="title_activity_alegerenivel">Alegerenivel</string>
+    <string name="title_activity_joc">Joc</string> 
+    <string name="title_activity_movie">Movie</string>
+    <string name="title_activity_instructiuni">Instructiuni</string>
+
+</resources>

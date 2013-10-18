@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="campus.rush.thegame"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="17" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/logo"
+        android:label="@string/app_name"
+        android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+        <activity
+            android:name="campus.rush.thegame.MainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="landscape" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="campus.rush.thegame.Alegerenivel"
+            android:label="@string/title_activity_alegerenivel"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name="campus.rush.thegame.Joc"
+            android:label="@string/title_activity_joc"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name="campus.rush.thegame.Movie"
+            android:label="@string/title_activity_movie"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name="campus.rush.thegame.Instructiuni"
+            android:label="@string/title_activity_instructiuni" 
+            android:screenOrientation="landscape" >
+        </activity>
+    </application>
+
+</manifest>

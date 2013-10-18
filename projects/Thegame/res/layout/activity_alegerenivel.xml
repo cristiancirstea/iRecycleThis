@@ -1,0 +1,78 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+  android:background="@drawable/levelselect"
+    tools:context=".Alegerenivel" >
+
+   
+    
+    
+    
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+     
+        
+        android:orientation="horizontal" >
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+     
+        
+        android:orientation="vertical" >
+        
+        
+        
+     
+
+      <ImageButton
+        android:id="@+id/imageButton1"
+        android:layout_width="150dp"
+        android:layout_height="70dp"
+       
+        android:onClick="Joc"
+        android:scaleType="centerCrop"
+        android:src="@drawable/parter" />
+      
+      <ImageButton
+        android:id="@+id/imageButton2"
+        android:scaleType="centerCrop"
+        android:layout_width="150dp" 
+        android:layout_height="70dp"
+        
+        android:src="@drawable/etaj1"
+        android:onClick="Joc" />
+   
+</LinearLayout>
+<LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+     android:layout_marginLeft="40dp"
+        
+        android:orientation="vertical" >
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="150dp"
+        android:layout_height="70dp"
+ 
+        android:onClick="Joc"
+        android:scaleType="centerCrop"
+        android:src="@drawable/etaj2" />
+
+   
+     <ImageButton
+        android:id="@+id/imageButton4"
+        android:scaleType="centerCrop"
+        android:layout_width="150dp"
+        android:layout_height="70dp"
+     
+        android:src="@drawable/etaj3"
+        android:onClick="Joc" />
+    
+     </LinearLayout>
+</LinearLayout>
+</RelativeLayout>
