@@ -1,4 +1,30 @@
 <?php
+//la o aplicatie in php externa se foloseste asta!!!!!
+//function GetDataFromWS($method,$params,$requestPage="request.php")
+//{
+//    $params["method"] = $method;
+//   $params[$GLOBALS["_WSUserRqParam"]] = $GLOBALS["WSUser"];
+//   $params[ $GLOBALS["_WSPasswordRqParam"] ]= $GLOBALS["WSPassword"];
+//   $params[$GLOBALS["_WSTypeRqParam"]] = $GLOBALS["WSTypeOfRequest"];
+//
+//$postdata = http_build_query(
+//    $params
+//);
+//
+//$opts = array('http' =>
+//    array(
+//        'method'  => 'POST',
+//        'header'  => 'Content-type: application/x-www-form-urlencoded',
+//        'content' => $postdata
+//    )
+//);
+//
+//$context  = stream_context_create($opts);
+//
+//$result = file_get_contents($GLOBALS["WSUrlRoot"]."/".$requestPage, false, $context);
+//return $result;
+//}
+
 
 include_once './library/common.php';
 
@@ -7,7 +33,7 @@ if (isset($_REQUEST["method"]))
 else
     $method="";
 
-  $isPicture=(isset($_REQUEST["photo"]));
+  
 
   switch ($method)
   {
@@ -42,6 +68,7 @@ else
         }
         else
             $long=-1;
+      $isPicture=(isset($_REQUEST["photo"]));
       SaveInregistrare($tip,($isPicture)?$_REQUEST["photo"]:"" ,  $lat,$long, $nume, "", $nr_tel);
       break;
   case "test":
@@ -54,24 +81,25 @@ else
           TestVB ($_REQUEST["Gina"]);
       if (isset($_REQUEST["Bogdan"]))
           TestVB ($_REQUEST["Bogdan"]);
-
-
-//      if (isset($_GET["DATA"]))
-//          TestVB ($_GET["DATA"]);
-//      if (isset($_GET["Gina"]))
-//          TestVB ($_GET["Gina"]);
-//      if (isset($_GET["Bogdan"]))
-//          TestVB ($_GET["Bogdan"]);
+    break;
+  case "GetUsers":
+      GetUsers();
+      break;
+  case "CheckLoginInterfataFirma":
+      if (isset($_REQUEST["USER"]))
+      {
+         $user= ($_REQUEST["USER"]);
+      }
+      else
+          $user="";
+      if (isset($_REQUEST["PASSWORD"]))
+      {
+         $passw= ($_REQUEST["PASSWORD"]);
+      }
+      else
+          $passw="";
+      CheckLoginInterfataFirma($user, $passw);
     break;
   }
-  
-
-//return;
-
-
-
-
-
-
-
 ?>
+

@@ -86,20 +86,30 @@ function GetTable($selectString)
      return "BRAVO";
  }
  
- function SaveInregistrare($tipDeseu,$imageBase64,$latitudine,$longitudine,$nume_eco,$prenume_eco,$nr_tel)
+ function SaveInregistrare($tipDeseu,$imageBase64,$latitudine=0,$longitudine=0,$nume_eco="",$prenume_eco="",$nr_tel=0)
  {
      $path="./library/img/";
-     $imageID=SaveLocalPicture($imageBase64);
-     if (!$imageID)
-         return false;
-     $sqlImg="Insert into imagini (id_imag,path) values('$imageID','$path');";
-     $aBoolImg=  ExecuteStatement($sqlImg);
-     if (!$aBoolImg)
-         return false;
+     if (trim($imageBase64)==="")
+     {
+         $imageID='-1';
+     }
+     else
+     {
+         $imageID=SaveLocalPicture($imageBase64);
+     }
+     if (($imageID)&&($imageID!=='-1'))
+     {
+        $sqlImg="Insert into imagini (id_imag,path) values('$imageID','$path');";
+        $aBoolImg=  ExecuteStatement($sqlImg);
+        if (!$aBoolImg)
+            return false;
+     }
+     
      $sqlInreg="insert into inregistrari"
              . "(data_inreg,ora_inreg,tip_deseu,id_imag,latitudine,longitudine,nume_ecologist,prenume_ecologist,nr_tel) "
              . "values(current_date,current_time,$tipDeseu,'$imageID',$latitudine,$longitudine,'$nume_eco','$prenume_eco',$nr_tel);"
              . ";";
+//     echo $sqlInreg;
      $aBool=  ExecuteStatement($sqlInreg);
      return $aBool;
      

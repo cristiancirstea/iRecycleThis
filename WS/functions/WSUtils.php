@@ -116,8 +116,8 @@ function GET_POST_TYPE($stringVar,$noCaseSensitive=false)
  */
 function ReturnJSON($theArray)
  {
-     $returnEntityName="rezultat";
-     $returnCountName="nr_rezultate";
+     $returnEntityName="response";
+     $returnCountName="count";
      header('Content-type: application/json');
      echo json_encode(array("".$returnEntityName=>$theArray,"".$returnCountName=>count($theArray)));
  }
@@ -129,8 +129,8 @@ function ReturnJSON($theArray)
   */
  function ReturnXML($theArray)
  {
-     $rezultName="rezultat";
-     $countName="nr_rezultate";
+     $rezultName="response";
+     $countName="count";
      $rootName="rootTag";
      $entitiesIndexName="index";
      header('Content-type: text/xml');
@@ -214,4 +214,20 @@ function ReturnJSON($theArray)
      return $randID;
  }
  
+ function GetUsers()
+{
+    $sql="select * from users";
+    $result=  GetTable($sql);
+    ReturnFromSubmitRequest($result);        
+    unset($result);
+}
+
+function CheckLoginInterfataFirma($user,$parola)
+{
+        $sql="select * from users where username_u='$user' and password_u='$parola';";
+        $result=  GetTable($sql);
+        ReturnFromSubmitRequest($result); 
+        unset($result);
+}
+
 ?>
