@@ -1,0 +1,112 @@
+<html>
+<head>
+    <link rel ="stylesheet" type = "text/css" href = "library/css/bootstrap.css">
+<link rel ="stylesheet" type = "text/css" href = "library/css/my_CSS.css">
+<script type = "text/javascript" src = "library/js/bootstrap.js"></script>
+<script type = "text/javascript" src = "library/js/my_JS.js"></script>
+<title> Test </title>
+</head>
+
+<body>
+<div id = "myHeader">
+	<div id = "Logo">
+	</div>
+</div>
+
+<script type="text/javascript">
+	function ValidateData() {
+      var input = document.getElementById("inputEmail");
+	  var pass = document.getElementById("inputPassword");
+	  var groupInput = document.getElementById("userPlace");
+	  var groupPass = document.getElementById("passPlace");
+	  var buton = document.getElementById("buton");
+	  var check = document.getElementById("chk");
+	
+      if (input.value === "" && pass.value === "")
+      {
+		groupInput.setAttribute("class", "control-group error");
+		groupPass.setAttribute("class", "control-group error");
+		buton.setAttribute("class", "btn btn-danger");
+		container.setAttribute("id", "containerError");
+		return false;
+		}
+	  else if (input.value === ""){
+			groupInput.setAttribute("class", "control-group error");
+			buton.setAttribute("class", "btn btn-danger");
+			container.setAttribute("id", "containerError");
+			return false;
+			}
+	       else if (pass.value === ""){
+					groupPass.setAttribute("class", "control-group error");
+					buton.setAttribute("class", "btn btn-danger");
+					container.setAttribute("id", "containerError");
+					return false;
+				}
+	  if(check.value === "on")
+			setCookie(input.value, 100);
+	  document.getElementById("formular").submit();
+	  return true;			
+	}
+	/*function setCookie(c_name, value, exdays){
+	
+	  var exdate = new Date();
+	  exdate.setDate(exdate.getDate() + exdays);
+	  var c_value = escape(value) + ((exdays === null) ? "" : ";	  expires=" + exdate.toUTCString());
+	  document.cookie = c_name + "=" + c_value;
+	}
+	
+	function getCookie(c_name){
+	
+	  var c_value = document.cookie;
+	  var c_start = c_value.indexOf(" " + c_name + "=");
+	  if (c_start === -1){
+		c_start = c_value.indexOf(c_name + "=");
+		}
+	  if (c_start === -1){
+		c_value = null;
+		}
+	  else{
+		c_start = c_value.indexOf("=", c_start) + 1;
+		var c_end = c_value.indexOf(";", c_start);
+		if (c_end === -1){
+			c_end = c_value.length;
+			}
+		c_value = unescape(c_value.substring(c_start,c_end));
+		}
+	  return c_value;
+	}
+}*/
+</script>   
+
+<div class = "container" id = "container">
+
+<form class="form-horizontal" name = "log" id = "formular" >
+
+  <div class="control-group" id = "userPlace"style = "margin-left:auto; margin-right:auto;">
+    <label class="control-label" for="inputEmail">User Name</label>
+    <div class="controls">
+      <input type="text" name = "user" id="inputEmail" placeholder="Email" >
+    </div>
+  </div>
+  
+  <div class="control-group" id = "passPlace">
+    <label class="control-label" for="inputPassword"  >Password</label>
+    <div class="controls">
+      <input type="password" name = "Pass" id="inputPassword" placeholder="Password">
+    </div>
+  </div>
+  
+  <div class="control-group">
+    <div class="controls">
+      <label class="checkbox">
+        <input type="checkbox" id = "chk"> Remember me
+      </label>
+      <button type="button" class="btn btn-success btn-default" id = "buton" onclick = "ValidateData();">Log in</button>
+    </div>
+  </div>
+  
+</form>
+
+</div>
+
+</body>
