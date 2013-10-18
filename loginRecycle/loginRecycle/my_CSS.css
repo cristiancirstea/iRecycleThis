@@ -1,0 +1,26 @@
+.container{
+			  height:180px; 
+			  width:350px; 
+			  border-radius:10px; 
+			  border:2px solid; 
+			  border-color: #667733; 
+			  box-shadow: 7px 7px 5px #667733;
+			  padding-right:10%; 
+			  padding-top:5%; 
+			  padding-bottom:3%; 
+			  margin-top:0px;
+		}
+#containerError.container{
+							border-color: #992211 !important; 
+						box-shadow: 7px 7px 5px #992211 !important;
+			    }
+#myHeader{
+			height: 200;
+			width: auto;
+			background: url("fundalCont1.png") repeat-x;
+			}
+#Logo{
+		height: 130;
+		width: 500;
+		background: url("home_iRT.png");
+		}
