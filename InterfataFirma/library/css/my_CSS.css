@@ -1,26 +1,147 @@
-.container{
+.my_container{
 			  height:180px; 
 			  width:350px; 
 			  border-radius:10px; 
 			  border:2px solid; 
 			  border-color: #667733; 
 			  box-shadow: 7px 7px 25px #667733;
-			  padding-right:10%; 
-			  padding-top:5%; 
-			  padding-bottom:3%; 
+			  padding-right:10px; 
+			  padding-top:5px; 
+			  padding-bottom:3px; 
 			  margin-top:0px;
 		}
 #containerError.container{
-							border-color: #992211 !important; 
-						box-shadow: 7px 7px 5px #992211 !important;
+                            border-color: #992211 !important; 
+                            box-shadow: 7px 7px 5px #992211 !important;
 			    }
 #myHeader{
-			height: 200;
+			height: 157px;
+box-shadow: 0px 0px 10px #333;
 			width: auto;
 			background: url("../img/fundalCont1.png") repeat-x;
 			}
 #Logo{
-		height: 130;
-		width: 500;
+		height: 130px;
+		width: 500px;
 		background: url("../img/home_iRT.png");
-		}
+                }
+.imagini{
+                //position:relative;
+                float: right;    
+                }
+#menu{
+                *margin-top: 80px;
+                margin-right: 20px;
+                width: auto;
+                
+                }
+#img1{
+                background: url(../img/home-icon.png) no-repeat;
+                width: 100px;
+                height: 70px;
+                background-size: 70px 70px;
+                display: block;
+                }
+#img2{
+                background: url(../img/google-map.png) no-repeat;
+                width: 110px;
+                height: 70px;
+                background-size: 104px 70px;
+                display: block;
+                }
+#img2:hover{
+                background: url(../img/google-map-hover.png) no-repeat; 
+                 background-size: 104px 70px;
+                cursor: pointer;
+                
+                }
+#img1:hover{
+                background: url(../img/home-icon-hover.png) no-repeat; 
+                 background-size: 70px 70px;
+                cursor: pointer;
+               
+                }
+  
+#img1:active{
+                   background-size: 65px 65px; 
+                }
+ #img2:active{
+                   background-size: 99px 65px; 
+                }
+                
+  .hidden-elem{
+                    display: none;
+                }
+ html { height: 100% }
+body { height: 100%; margin: 0; padding: 0 }
+#map-canvas { height: 100% }
+
+#containerLogin,
+#butonLogin{
+    margin-left: auto;
+    margin-right: auto;
+}
+#containerLogin{
+    margin-top: 50px;
+    width: 450px;
+    padding: 20px;
+    padding-top: 50px;
+    padding-bottom: 30px;
+/*margin-left: 15px;
+margin-right: 10px;*/
+}
+#butonLogin{
+    margin-top: 50px;
+    height: 40px;
+    width: 100%;
+}
+#inputEmail,
+#inputPassword{
+    height: 32px;
+}
+#numeUser{
+font-family: 'Shruti';
+font-size: 18px;
+margin-top: 10px;
+vertical-align: middle;
+display: inline-block;
+}
+#container-userName{
+    margin: 5px;
+}
+#logo-row{
+    height: 80px;
+}
+#btnLogOut{
+    margin: 5px;
+}
+#container-map{
+    *margin-top: 10px;
+}
+
+#container-dashboard{
+    margin-top: 20px;
+}
+.btn-small{
+    height: 25px;
+    width: 35px;
+}
+#map-alert{
+    margin-top: 10px;
+    margin-bottom:  10px;
+    width: 940px;
+    margin-left: auto;
+    margin-right: auto;
+}
+#map-alert > strong,
+#map-alert > span{
+    width: 200px;
+    height: 25px;
+    text-align: center;
+    display: block;
+     margin-left: auto;
+    margin-right: auto;
+}
+.cell-center{
+    text-align: center;
+}

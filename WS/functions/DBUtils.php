@@ -86,9 +86,9 @@ function GetTable($selectString)
      return "BRAVO";
  }
  
- function SaveInregistrare($tipDeseu,$imageBase64,$latitudine=0,$longitudine=0,$nume_eco="",$prenume_eco="",$nr_tel=0)
+ function SaveInregistrare($tipDeseu,$imageBase64,$latitudine=0,$longitudine=0,$nume_eco="",$numar="",$nr_tel)
  {
-     $path="./library/img/";
+     $path="/library/img/";
      if (trim($imageBase64)==="")
      {
          $imageID='-1';
@@ -99,17 +99,20 @@ function GetTable($selectString)
      }
      if (($imageID)&&($imageID!=='-1'))
      {
+         $path.=$imageID.".JPEG";
         $sqlImg="Insert into imagini (id_imag,path) values('$imageID','$path');";
         $aBoolImg=  ExecuteStatement($sqlImg);
         if (!$aBoolImg)
+        {
             return false;
+        }
      }
-     
-     $sqlInreg="insert into inregistrari"
-             . "(data_inreg,ora_inreg,tip_deseu,id_imag,latitudine,longitudine,nume_ecologist,prenume_ecologist,nr_tel) "
-             . "values(current_date,current_time,$tipDeseu,'$imageID',$latitudine,$longitudine,'$nume_eco','$prenume_eco',$nr_tel);"
+     TestVB($numar);
+     $sqlInreg="insert into inregistrari "
+             . "(data_inreg,ora_inreg,tip_deseu,id_imag,latitudine,longitudine,nume_ecologist,nr_tel) "
+             . " values(current_date,current_time,$tipDeseu,'$imageID',$latitudine,$longitudine,'$nume_eco','$nr_tel')"
              . ";";
-//     echo $sqlInreg;
+     echo $sqlInreg;
      $aBool=  ExecuteStatement($sqlInreg);
      return $aBool;
      

@@ -1,5 +1,8 @@
 <?php
 include "./include/header.php";
+$LOGIN_PAGE=true;
+include_once './library/common.php';
+ResetSessionVariable();
 ?>
 
 <div id = "myHeader">
@@ -11,9 +14,9 @@ include "./include/header.php";
 
 </script>   
 
-<div class = "container" id = "container">
+<div class = "my_container" id = "containerLogin">
 
-    <form class="form-horizontal" name = "log" id = "formular" action="verify_data.php" method="POST">
+    <form class="form-horizontal " name = "log" id = "formular" action="verify_data.php" method="POST">
 
   <div class="control-group" id = "userPlace"style = "margin-left:auto; margin-right:auto;">
     <label class="control-label" for="inputEmail">User Name</label>
@@ -22,7 +25,9 @@ include "./include/header.php";
              value=
              "<?php
                 if (isset($_GET["u"]))
+                {
                     echo $_GET["u"];
+                }
              ?>">
     </div>
   </div>
@@ -35,12 +40,12 @@ include "./include/header.php";
   </div>
   
   <div class="control-group">
-    <div class="controls">
+    <!--<div class="controls">-->
 <!--      <label class="checkbox">
         <input type="checkbox" id = "chk"> Remember me
       </label>-->
-<button type="button" class="btn btn-success btn-default" id = "buton" onclick = "ValidateDataLogin();">Log in</button>
-    </div>
+        <button type="button" class="btn btn-success span6" id = "butonLogin" onclick = "ValidateDataLogin();">Log in</button>
+    <!--</div>-->
   </div>
   
 </form>

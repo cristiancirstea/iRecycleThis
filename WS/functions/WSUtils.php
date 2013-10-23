@@ -230,4 +230,31 @@ function CheckLoginInterfataFirma($user,$parola)
         unset($result);
 }
 
+function GetInregistrari()
+{
+    $sql="select i.*,p.path,p.verificata,d.text as 'deseu' from inregistrari i,deseuri d,imagini p
+            where i.id_imag=p.id_imag and d.id_deseu=i.tip_deseu and i.verificata=0";
+        $result=  GetTable($sql);
+        ReturnFromSubmitRequest($result); 
+        unset($result);
+}
+
+function ValidateInregistrare($id_inreg)
+{
+    $sql="update inregistrari set verificata=1 where id_inreg=$id_inreg";
+    $aBool=  ExecuteStatement($sql);
+    return $aBool;
+}
+
+function GetCoordonate($id_i)
+{
+    $sql="select i.nume_ecologist as 'nume',i.latitudine as 'lat',i.longitudine as 'long',d.text as 'deseu',
+        p.path
+        from inregistrari i,deseuri d, imagini p
+            where d.id_deseu=i.tip_deseu and i.verificata=0 and i.id_imag=p.id_imag ".
+            ((isset($id_i)&&($id_i!='-1'))?" and i.id_inreg=$id_i":"");
+        $result=  GetTable($sql);
+        ReturnFromSubmitRequest($result); 
+        unset($result);
+}
 ?>

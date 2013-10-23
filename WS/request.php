@@ -29,11 +29,15 @@
 include_once './library/common.php';
 
 if (isset($_REQUEST["method"]))
+{
     $method=$_REQUEST["method"];
+}
 else
+{
     $method="";
+}
 
-  
+
 
   switch ($method)
   {
@@ -43,33 +47,43 @@ else
             $tip=$_REQUEST["tip"];
         }
         else
+        {
             $tip=1;
+        } 
       if (isset($_REQUEST["Nume"]))
         {
             $nume=$_REQUEST["Nume"];
         }
         else
+        {
             $nume="";
+        }
         if (isset($_REQUEST["Numar"]))
         {
             $nr_tel=$_REQUEST["Numar"];
         }
         else
-            $nr_tel=0;
+        {
+            $nr_tel="";
+        }
         if (isset($_REQUEST["latitude"]))
         {
             $lat=$_REQUEST["latitude"];
         }
-        else
-            $lat=-1;
+        else{
+           $lat=-1; 
+        }
+            
         if (isset($_REQUEST["longitude"]))
         {
             $long=$_REQUEST["longitude"];
         }
         else
+        {
             $long=-1;
+        }
       $isPicture=(isset($_REQUEST["photo"]));
-      SaveInregistrare($tip,($isPicture)?$_REQUEST["photo"]:"" ,  $lat,$long, $nume, "", $nr_tel);
+      SaveInregistrare($tip,(($isPicture)?$_REQUEST["photo"]:"") ,  $lat,$long, $nume,"dummy",$nr_tel );
       break;
   case "test":
             if (isset($_REQUEST["DATA"]))
@@ -100,6 +114,26 @@ else
           $passw="";
       CheckLoginInterfataFirma($user, $passw);
     break;
+    case "GetInregistrari":
+        GetInregistrari();
+      break;
+  case "GetCoordonate":
+      if (isset($_REQUEST["id_i"]))
+      {
+        GetCoordonate($_REQUEST["id_i"]);
+      }
+      else
+          GetCoordonate(-1);
+      break;
+    case "ValidateInregistrare":
+        var_dump($_REQUEST);
+        if (isset($_REQUEST["id_inreg"]))
+      {
+         $id_inreg= ($_REQUEST["id_inreg"]);
+         ValidateInregistrare($id_inreg);
+      }
+        
+      break;
   }
 ?>
 

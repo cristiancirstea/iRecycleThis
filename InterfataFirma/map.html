@@ -1,0 +1,45 @@
+
+    <script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=&sensor=true">
+    </script>
+    <script type="text/javascript">
+        var myLatlng = [new google.maps.LatLng(44.4325,26.103889),
+                  new google.maps.LatLng(-25.363882,131.044922),
+                  new google.maps.LatLng(15.363882,31.044922)];
+        function initializeMap() {
+            var mapOptions = {
+                zoom: 2,
+                center: myLatlng[0],
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+            for( var i = 0; i < myLatlng.length; i++){
+                var marker = new google.maps.Marker({
+                    position: myLatlng[i],
+                    map: map,
+                    title: 'Hello World!'
+                });
+            }
+        }
+        
+        
+        google.maps.event.addDomListener(window, 'load', initializeMap);
+    </script>
+</head>
+
+<body>
+    <div id = "myHeader" class = "container header">
+	<div id = "Logo" class = "span7"></div>
+        <div id = "menu" class = " container imagini" align = "right">
+            <table class = "pull-right">
+                <tr>
+                <td><a href = "dashboard.php" id="img1"></a></td>
+                <td><a href = "map.html" id="img2"></a></td>
+                </tr>
+            </table> 
+        </div>
+    </div>
+    
+    <div id="map-canvas" style="width: 60%; height: 100%; margin-left:20%; margin-top:5%;"></div>
+  
+</body>
