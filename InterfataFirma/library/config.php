@@ -1,5 +1,5 @@
 <?php
-$WSUrlRoot="http://192.168.222.151/WS";
+$WSUrlRoot="http://localhost/ws";
 $_WSUserRqParam="urq";
 $_WSPasswordRqParam="prq";
 $_WSTypeRqParam="trq";

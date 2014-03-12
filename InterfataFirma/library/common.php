@@ -1,6 +1,6 @@
 <?php
-include_once './library/config.php';
 include_once './functions/Utils.php';
+
  if (strlen(session_id() )<1) session_start();
  
  if (!isset($GLOBALS['LOGIN_PAGE'])||$GLOBALS['LOGIN_PAGE']===false)

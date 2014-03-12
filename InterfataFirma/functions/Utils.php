@@ -1,5 +1,23 @@
 <?php
-//include_once '../library/config.php';
+if (file_exists("../library/config.php"))
+    include_once '../library/config.php';
+else
+   include_once './library/config.php';     
+if (file_exists("./functions/WSUtils.php"))
+    include_once './functions/WSUtils.php';
+else
+    include_once '../functions/WSUtils.php';
+if (isset($_REQUEST["method"]))
+{
+    switch ($_REQUEST["method"]) {
+        case "PopuleazaTabelInregistrari":
+            PopuleazaTabelInregistrari();
+            break;
+
+        default:
+            break;
+    }
+}
 
 function GetDataFromWS($method,$params,$returnAssoc=false,$requestPage="request.php")
 {
@@ -35,8 +53,14 @@ function GetDataFromWS($method,$params,$returnAssoc=false,$requestPage="request.
 
 function PopuleazaTabelInregistrari()
 {
-   $data=GetDataFromWS("GetInregistrari", array(),true);
-   if ($data["count"]===0)
+//   $response=GetDataFromWS("GetInregistrari", array(),true);
+    $response=  ws_rest("GET", "/inregistrari", "", null, 1);
+    if (!isset($response["response"]))
+    {
+        echo "Eroare la conectarea cu baza de date!";
+       return -1;
+    }
+   if ($response["count"]===0)
    {
        echo "Nu sunt date!";
        return 0;
@@ -59,7 +83,7 @@ function PopuleazaTabelInregistrari()
         echo '</thead>';
         echo '<tbody>';
         $nr_inreg=0;
-            foreach ($data["response"] as $inregistrare)
+            foreach ($response["response"] as $inregistrare)
             { 
                 $nr_inreg++;
 //                foreach ($inregistrare as $column=>$value )
@@ -97,8 +121,8 @@ function PopuleazaTabelInregistrari()
             }
         echo '</tbody>';
    echo '</table>';
-   $row_count=$data["count"];
-   unset($data);
+   $row_count=$response["count"];
+   unset($response);
     return $row_count;
 }
 function MyFormatFloat($aFloat,$decimals = 2,$dec_point = '.',$thousands_sep = ',' )

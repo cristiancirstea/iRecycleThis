@@ -198,7 +198,7 @@ function GetDataFromWS(numePagina,params,submitMethod,callBackFunction)
     
     request.done(function(msg) {
         var aObj=msg;
-        console.log(aObj);
+       // console.log(aObj);
 //     var aObj=JSON.parse(msg);
         if (callBackFunction)
         {

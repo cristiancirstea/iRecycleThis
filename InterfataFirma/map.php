@@ -5,12 +5,23 @@ include './include/top.php';
 if (isset($_REQUEST["id_i"]))
 {
     $id_i=  intval($_REQUEST["id_i"]);
-    $data=GetDataFromWS("GetCoordonate", array("id_i"=>$id_i));
+    //$data=GetDataFromWS("GetCoordonate", array("id_i"=>$id_i));
+    $data=  ws_rest("GET", "/coordonate/$id_i", "", null,1);
+        
 }
 else{
-    $data=GetDataFromWS("GetCoordonate", array()); 
+    //$data=GetDataFromWS("GetCoordonate", array()); 
+    $data=  ws_rest("GET", "/coordonate", "", null, 1);
 }
 
+    if (!isset($data["response"]))
+      echo '<div class="alert alert-danger" id="err-alert">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Error!</strong>
+        <span>An error occurred while trying to connect to database. 
+        </span>
+      </div>';  
+  
 ?>  
 <script type="text/javascript"
       src="https://maps.googleapis.com/maps/api/js?key=&sensor=true">
@@ -21,9 +32,9 @@ else{
 //                  new google.maps.LatLng(15.363882,31.044922)]; 
          var dataJSON;
               <?php
-                echo "dataJSON=JSON.parse('".trim($data)."');";
+                echo "dataJSON=JSON.parse('".trim(json_encode($data["response"]))."');";
               ?>
-          obiecte=dataJSON.response;
+          obiecte=dataJSON;
           for (var i=0;i<obiecte.length;i++)
           {
               obiecte[i].path="<?php echo $GLOBALS["WSUrlRoot"]?>"+obiecte[i].path;
@@ -37,8 +48,8 @@ else{
         <button type="button" class="close" data-dismiss="alert">&times;</button>
         <strong>Heads up!</strong>
         <span>There are <?php 
-            $dataAr=  json_decode($data,true);
-            $nr_alerte=$dataAr["count"];
+            //$dataAr=  json_decode($data,true);
+            $nr_alerte=$data["count"];
             echo $nr_alerte;?> alerts. 
         </span>
       </div>

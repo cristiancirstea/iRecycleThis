@@ -142,6 +142,15 @@ display: inline-block;
      margin-left: auto;
     margin-right: auto;
 }
+#err-alert 
+{
+    width: 200px;
+    height: 25px;
+    text-align: center;
+    display: block;
+     margin-left: auto;
+    margin-right: auto;
+}
 .cell-center{
     text-align: center;
 }

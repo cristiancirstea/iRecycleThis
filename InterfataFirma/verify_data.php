@@ -1,11 +1,20 @@
 <?php
 $LOGIN_PAGE=true;
 include_once './library/common.php';
+//include_once './functions/WSUtils.php';
 ResetSessionVariable();
 //var_export($_POST);
-$responseJSON= GetDataFromWS("CheckLoginInterfataFirma",array("USER"=>$_POST["username"],"PASSWORD"=>$_POST["password"]));
+//$responseJSON= GetDataFromWS("CheckLoginInterfataFirma",array("USER"=>$_POST["username"],"PASSWORD"=>$_POST["password"]));
 
-$response=  json_decode($responseJSON,true);
+$data=array(
+  "user"=>$_POST["username"],
+    "parola"=>$_POST["password"]
+);
+$response=  ws_rest("GET", "/login","",$data,1);
+
+//var_export($response);
+//return;
+//$response=  json_decode($responseJSON,true);
 //var_export($response);
 ////return;
 if (!$response["count"])
