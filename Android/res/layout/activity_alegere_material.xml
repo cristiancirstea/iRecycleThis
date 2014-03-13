@@ -1,0 +1,74 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+   	android:background="@drawable/meniurifinal"
+    tools:context=".AlegereMaterial" >
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="140dp"
+        android:src="@drawable/trucksplastic"
+        android:onClick="picked" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="85dp"
+        android:layout_height="85dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/imageView1"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/truckspaper"
+        android:onClick="picked" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="93dp"
+        android:layout_height="93dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/imageView1"
+        android:layout_marginTop="25dp"
+        android:layout_marginRight="8dp"
+        android:src="@drawable/trucksglass"
+        android:onClick="picked" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/imageView2"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="35dp"
+        android:src="@drawable/truckelelectrics"
+        android:onClick="picked" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="107dp"
+        android:layout_height="107dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="8dp"
+        android:layout_below="@+id/imageView3"
+        android:layout_marginTop="22dp"
+        android:src="@drawable/truckbatteries"
+        android:onClick="picked" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="115dp"
+        android:layout_height="115dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:layout_alignTop="@+id/imageView5"
+        android:layout_marginTop="38dp"
+        android:onClick="picked"
+        android:src="@drawable/trucksalert" />
+
+</RelativeLayout>

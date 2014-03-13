@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.irecyclethis"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="17" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/logo1"
+        android:label="@string/app_name"
+        android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+        <activity
+            android:name="com.example.irecyclethis.MainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.example.irecyclethis.AlegereMaterial"
+            android:label="@string/title_activity_alegere_material"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.irecyclethis.Formular"
+            android:label="@string/title_activity_formular"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.irecyclethis.Story"
+            android:label="@string/title_activity_story"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.irecyclethis.Felicitari"
+            android:label="@string/title_activity_felicitari"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.irecyclethis.Meniu"
+            android:label="@string/title_activity_meniu" >
+        </activity>
+    </application>
+
+</manifest>
