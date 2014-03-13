@@ -48,8 +48,8 @@ class DBClass {
             }
             dbCommit($this->_connection);
             dbFreeResult($ResultTemp);
-             $file="text.txt";
-        file_put_contents($file,"\n - "."select" , FILE_APPEND | LOCK_EX);
+          //   $file="text.txt";
+        //file_put_contents($file,"\n - "."select" , FILE_APPEND | LOCK_EX);
         }
         catch (Exception $e)
         {
