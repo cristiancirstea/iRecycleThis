@@ -79,17 +79,24 @@ class MyAPI extends API
            $this->request=array_merge( $this->request,$putParams);
         }
         $this->_goodUser=true;
+        //TODO
         //!!!!!!!!!!!! + Autentificare !!!!!!!!!!!!!!!
     }
     
  private function _SaveLocalPicture($strBase64,$path="./library/img/")
  {
+     try{
      if (!$strBase64)
          return "-1";
      $decoded=  base64_decode($strBase64);
      $randID=  GenerareRandID();
      $path="".$path.$randID.".JPEG";
      file_put_contents($path, $decoded);
+     }
+    catch (Exception $e)
+    {
+        Security::_ThrowError("localPicture00001","Can't save local picture!","Local picture error: ".$e);
+    }
      return $randID;
  }
     /**
@@ -97,14 +104,24 @@ class MyAPI extends API
      */
     protected function login()
     {
-         if (!$this->_goodUser)
-             throw new Exception("WS000002 Eroare de autentificare.");
          $db= new DBClass();
-        $sql="select * from users 
-            where username_u='".$this->request["user"]."' 
+         try{
+            $sql="select * from users 
+                where username_u='".$this->request["user"]."' 
                 and password_u='".$this->request["parola"]."';";
-        $data=$db->GetTable($sql);
-        
+            $data=$db->GetTable($sql);
+           
+         }
+         catch(Exception $e)
+         {
+             Security::_ThrowError("localPicture00001","LoginError!","LoginError: ".$e);
+         }
+          if (count($data)===0)
+            {
+               Security::_ThrowError("localPicture00002","Incorect login information!",
+                       "LoginIncorect: U:".$this->request["user"]."\n".
+                       "P:".$this->request["parola"]);
+            }
         return $data;
         
     }
@@ -114,8 +131,8 @@ class MyAPI extends API
     }
     protected function pictures($params)
     {
-        if (!$this->_goodUser)
-             throw new Exception("WS000002 Eroare de autentificare.");
+//        if (!$this->_goodUser)
+//             throw new Exception("WS000002 Eroare de autentificare.");
          $db= new DBClass();
          switch ($this->method) {
              case "GET":
@@ -123,6 +140,7 @@ class MyAPI extends API
              case "PUT":
                  break;
              case "POST":
+                 //save local picture and add it into database
                 $path="/library/img/";
                  
                     if (trim($this->request["imageBase64"])==="")
@@ -138,23 +156,22 @@ class MyAPI extends API
                     {
                       try{
                       
-                        $path.=$imageID.".JPEG";
-                       $sqlImg="Insert into imagini (id_imag,path) values('$imageID','$path');";
-                        
-                       $aBoolImg=  $db->ExecuteStatement($sqlImg);
-                       if (!$aBoolImg)
-                       {
-                           //return false;
-                       }
-                      }
+                            $path.=$imageID.".JPEG";
+                            $sqlImg="Insert into imagini (id_imag,path) values('$imageID','$path');";
+
+                            $aBoolImg=  $db->ExecuteStatement($sqlImg);
+                            if (!$aBoolImg)
+                            {
+                               Security::_ErrorLog("pictures0005","At insert picture into imagini table!");
+                            }
+                        }
                        catch (Exception $e)
                        {
-                            TestVB($e);
-                        throw new Exception("DB error1!");
+                            Security::_ThrowError("picure00002","DB error1!");
                        }
                     }
                     try{
-                    $sqlInreg="insert into inregistrari "
+                        $sqlInreg="insert into inregistrari "
                             . "(data_inreg,ora_inreg,tip_deseu,id_imag,latitudine,longitudine,nume_ecologist,nr_tel) "
                             . " values(current_date,current_time,
                             ".$this->request["tip"].",
@@ -164,17 +181,15 @@ class MyAPI extends API
                             '".$this->request["Nume"]."',
                             '".$this->request["Numar"]."')"
                             . ";";
-                    TestVB(json_encode($this->request));
-                    $aBool=$db->ExecuteStatement($sqlInreg);
-                    if (!$aBool)
-                        throw new Exception("Save faild!");
-                    else
-                        $data=array("success"=>true);
-                    }
+                        $aBool=$db->ExecuteStatement($sqlInreg);
+                        if (!$aBool)
+                            Security::_ErrorLog("picture0001","Save faild!");
+                        else
+                            $data=array("success"=>true);
+                        }
                     catch (Exception $e)
                     {
-                        TestVB($e);
-                        throw new Exception("DB error!");
+                       Security::_ThrowError("picture00003","DB error!");
                     }
                  break;
              case "DELETE":
@@ -187,8 +202,8 @@ class MyAPI extends API
     }
     protected function coordonate($params)
     {
-        if (!$this->_goodUser)
-             throw new Exception("WS000002 Eroare de autentificare.");
+//        if (!$this->_goodUser)
+//            Security::_ThrowError("WS000002","Eroare de autentificare.");
          $db= new DBClass();
          switch ($this->method) {
              case "GET":
@@ -215,8 +230,8 @@ class MyAPI extends API
     protected function inregistrari($params)
     {
         
-         if (!$this->_goodUser)
-             throw new Exception("WS000002 Eroare de autentificare.");
+//         if (!$this->_goodUser)
+//             throw new Exception("WS000002 Eroare de autentificare.");
          $db= new DBClass();
          switch ($this->method) {
              case "GET":
@@ -245,12 +260,12 @@ class MyAPI extends API
                         else 
                         {
                             $sql="";
-                            throw new Exception("WS000003 Parametrii necunoscuti.");
+                           Security::_ThrowError("WS000003","Parametrii necunoscuti.");
                         }
                         break;
                     default:
                         $sql="";
-                        throw new Exception("WS000004 Parametrii necunoscuti.");
+                        Security::_ThrowError("WS000004","Parametrii necunoscuti.");
                         break;
                  }
                  if (trim($sql)!=="")
@@ -266,11 +281,11 @@ class MyAPI extends API
                     if ($aBool)
                         $data= array("success"=>true);
                     else
-                      throw new Exception("WS000003 Verificarea inregistrarii nu s-a putut realiza.");    
+                      Security::_ThrowError("WS000003","Verificarea inregistrarii nu s-a putut realiza.");    
                  }
                  else
                  {
-                  throw new Exception("WS000004 Id-ul inregistrarii nu a fost transmis.");  
+                  Security::_ThrowError("WS000004","Id-ul inregistrarii nu a fost transmis.");  
                  }
                  break;
              case "PUT":
