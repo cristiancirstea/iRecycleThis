@@ -1,5 +1,5 @@
 <?php
-$WSUrlRoot="http://localhost/ws";
+$WSUrlRoot="http://localhost/WebService";
 $_WSUserRqParam="urq";
 $_WSPasswordRqParam="prq";
 $_WSTypeRqParam="trq";

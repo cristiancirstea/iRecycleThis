@@ -1,4 +1,7 @@
-
+var WSRootURI='/WebService/service';
+//from header.php
+//var _CIP="<?php echo $_SERVER["REMOTE_ADDR"];?>";
+//var _SIP="<?php echo $_SERVER['SERVER_ADDR'];?>";
 function initializeMap() {
             var mapOptions = {
                 zoom: 2,
@@ -158,13 +161,10 @@ function VerificaInregistrare(idBtn)
     setTimeout(function(){
         row.remove();
     },300);
-    var ip_ws;
-    if (_CIP==_SIP)
-        ip_ws="localhost";
-    else
-        ip_ws=_SIP;
-    GetDataFromWS("http://"+ip_ws+"/ws/request.php",
-        '{"method":"ValidateInregistrare","urq":"asd","prq":"asdsd","trq":"json","id_inreg":"'+row.children('td[class*="idInreg"]').text()+'"}',
+   
+    GetDataFromWS("/inregistrari/"+row.children('td[class*="idInreg"]').text(),
+       // '{"method":"ValidateInregistrare","urq":"asd","prq":"asdsd","trq":"json","id_inreg":"'+row.children('td[class*="idInreg"]').text()+'"}',
+        '{}',
         "POST",
         function(obj){
             console.log(obj);
@@ -183,10 +183,17 @@ function VerificaInregistrare(idBtn)
 //    $("#"+idForma).submit().remove();
 }
 
-function GetDataFromWS(numePagina,params,submitMethod,callBackFunction)
+function GetDataFromWS(URI,params,submitMethod,callBackFunction)
 {
-
+    var numePagina;
     submitMethod=submitMethod||"POST";
+    params=params||"[]";
+     var ip_ws;
+    if (_CIP==_SIP)
+        ip_ws="localhost";
+    else
+        ip_ws=_SIP;
+    numePagina="http://"+ip_ws+WSRootURI+URI;
     var Jparams=JSON.parse(params);
     var request = $.ajax({
       url: numePagina,
@@ -197,8 +204,14 @@ function GetDataFromWS(numePagina,params,submitMethod,callBackFunction)
  
     
     request.done(function(msg) {
+        
         var aObj=msg;
-       // console.log(aObj);
+        if (msg.error)
+        {
+            alert(mesg.error);
+            return;
+        }
+      // console.log(msg);
 //     var aObj=JSON.parse(msg);
         if (callBackFunction)
         {
