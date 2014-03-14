@@ -2,6 +2,7 @@
 
 include_once './API.php';
 require_once './library/DBClass.php';
+include_once './Security.php';
 /**
  * Verifica daca stringul e bun pt a fi transmis in Firebird.
  * 
@@ -66,7 +67,7 @@ class MyAPI extends API
         parent::__construct($request);
         $this->_goodUser=false;
         $this->_userID=0;
-        
+         Security::_ErrorLog("test00001",  json_encode($this->request));
 //        
 //          echo "<br>".$this->file;
        if (strtoupper($this->method)=="PUT")
@@ -85,13 +86,12 @@ class MyAPI extends API
     
  private function _SaveLocalPicture($strBase64,$path="./library/img/")
  {
+     $randID=-1;
      try{
-     if (!$strBase64)
-         return "-1";
-     $decoded=  base64_decode($strBase64);
-     $randID=  GenerareRandID();
-     $path="".$path.$randID.".JPEG";
-     file_put_contents($path, $decoded);
+        $decoded=  base64_decode($strBase64);
+        $randID=  GenerareRandID();
+        $path="".$path.$randID.".JPEG";
+        file_put_contents($path, $decoded);
      }
     catch (Exception $e)
     {
@@ -134,6 +134,7 @@ class MyAPI extends API
 //        if (!$this->_goodUser)
 //             throw new Exception("WS000002 Eroare de autentificare.");
          $db= new DBClass();
+         $data=array();
          switch ($this->method) {
              case "GET":
                    break;
@@ -142,16 +143,17 @@ class MyAPI extends API
              case "POST":
                  //save local picture and add it into database
                 $path="/library/img/";
-                 
-                    if (trim($this->request["imageBase64"])==="")
+                  Security::_ErrorLog("test00001",  json_encode($this->request["photo"]));
+                    if (trim($this->request["photo"])==="")
                     {
                         $imageID='-1';
                     }
                     else
                     {
-                        $imageID=  $this->_SaveLocalPicture($this->request["imageBase64"]);
+                        $imageID=  $this->_SaveLocalPicture($this->request["photo"]);
                     }
-                    
+                   
+                    Security::_ErrorLog("test00002",$imageID);
                     if (($imageID!='-1'))
                     {
                       try{
@@ -226,6 +228,19 @@ class MyAPI extends API
         }
         return $data;
     }
+    protected function test($params)
+    {
+        $this->_SaveLocalPicture("");
+    }
+    protected function getPicture($params)
+    {
+        $path='./library/img/events/2.jpeg';
+        $type = pathinfo($path, PATHINFO_EXTENSION);
+        $data = file_get_contents($path);
+        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+        return array(array("picture"=>base64_encode($data)));// $base64;
+    }
+    
     
     protected function inregistrari($params)
     {
@@ -274,7 +289,7 @@ class MyAPI extends API
                      $data=null;
                    break;
              case "POST":
-                 if (count($params)===0)
+                 if (count($params)>0)
                  {
                     $sql="update inregistrari set verificata=1 where id_inreg=$params[0]";
                     $aBool=  ExecuteStatement($sql);
